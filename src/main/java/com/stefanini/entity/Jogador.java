@@ -1,6 +1,7 @@
 package com.stefanini.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +11,19 @@ import java.util.List;
 public class Jogador {
 
     @Id
-    @Column(name = "IdJogador"/*"id_jogador"*/)
+    @Column(name = "IdJogador")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column
+    @Column(nullable = false)
+    @Size(min = 4, max = 10)
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private BigDecimal saldo;
-
 
     @ManyToMany
     @JoinTable(name = "Jogador_Stefamon",

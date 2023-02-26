@@ -5,10 +5,7 @@ import com.stefanini.service.JogadorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("/jogador")
@@ -31,17 +28,18 @@ public class JogadorResource {
 
     @POST
     public Response salvar(@Valid Jogador jogador) {
-        jogadorService.salvar(jogador);
+        jogadorService.cadastrarJogador(jogador);
+//        jogadorService.salvar(jogador);
         return Response.status(Response.Status.CREATED).build();
     }
 
-    @POST
+    @PUT
     public Response alterar(@Valid Jogador jogador) {
         jogadorService.alterar(jogador);
         return Response.status(Response.Status.OK).build();
     }
 
-    @POST
+    @DELETE
     @Path("/{id}")
     public Response deletar(@PathParam("id") Long id) {
         jogadorService.deletar(id);
